@@ -1,31 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\dante\\OneDrive\\Documents\\.Net\\C#\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj": {}
+    "C:\\Users\\dante\\OneDrive\\Documents\\AgendaDelConsultorio\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj": {}
   },
   "projects": {
-    "C:\\Users\\dante\\OneDrive\\Documents\\.Net\\C#\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj": {
+    "C:\\Users\\dante\\OneDrive\\Documents\\AgendaDelConsultorio\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\dante\\OneDrive\\Documents\\.Net\\C#\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj",
+        "projectUniqueName": "C:\\Users\\dante\\OneDrive\\Documents\\AgendaDelConsultorio\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj",
         "projectName": "AgendaDelConsultorio",
-        "projectPath": "C:\\Users\\dante\\OneDrive\\Documents\\.Net\\C#\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj",
+        "projectPath": "C:\\Users\\dante\\OneDrive\\Documents\\AgendaDelConsultorio\\AgendaDelConsultorio\\AgendaDelConsultorio.csproj",
         "packagesPath": "C:\\Users\\dante\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\dante\\OneDrive\\Documents\\.Net\\C#\\AgendaDelConsultorio\\obj\\",
+        "outputPath": "C:\\Users\\dante\\OneDrive\\Documents\\AgendaDelConsultorio\\AgendaDelConsultorio\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\dante\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

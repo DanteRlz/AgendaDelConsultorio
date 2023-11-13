@@ -22,19 +22,19 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Pacientes
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.pacientes.Include(p => p.Localidad).Include(p => p.Provincia);
+            var applicationDbContext = _context.Pacientes.Include(p => p.Localidad).Include(p => p.Provincia);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Pacientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.pacientes == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.pacientes
+            var paciente = await _context.Pacientes
                 .Include(p => p.Localidad)
                 .Include(p => p.Provincia)
                 .FirstOrDefaultAsync(m => m.PacienteId == id);
@@ -49,8 +49,8 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Pacientes/Create
         public IActionResult Create()
         {
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Descripcion");
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "Descripcion");
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion");
             return View();
         }
 
@@ -67,26 +67,26 @@ namespace AgendaDelConsultorio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
 
         // GET: Pacientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.pacientes == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.pacientes.FindAsync(id);
+            var paciente = await _context.Pacientes.FindAsync(id);
             if (paciente == null)
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
 
@@ -122,20 +122,20 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
 
         // GET: Pacientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.pacientes == null)
+            if (id == null || _context.Pacientes == null)
             {
                 return NotFound();
             }
 
-            var paciente = await _context.pacientes
+            var paciente = await _context.Pacientes
                 .Include(p => p.Localidad)
                 .Include(p => p.Provincia)
                 .FirstOrDefaultAsync(m => m.PacienteId == id);
@@ -146,20 +146,30 @@ namespace AgendaDelConsultorio.Controllers
 
             return View(paciente);
         }
+        [HttpGet]
 
+        public async Task<IActionResult> ObtenerLocalidadesPorProvincia(int provinciaId)
+        {
+            var localidades = await _context.Localidades
+                .Where(l => l.ProvinciaId == provinciaId)
+                .Select(l => new {l.Localidadid, l.Descripcion})
+                .ToListAsync();
+
+            return Json(localidades);
+        }
         // POST: Pacientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.pacientes == null)
+            if (_context.Pacientes == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.pacientes'  is null.");
             }
-            var paciente = await _context.pacientes.FindAsync(id);
+            var paciente = await _context.Pacientes.FindAsync(id);
             if (paciente != null)
             {
-                _context.pacientes.Remove(paciente);
+                _context.Pacientes.Remove(paciente);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +178,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool pacienteExists(int id)
         {
-          return (_context.pacientes?.Any(e => e.PacienteId == id)).GetValueOrDefault();
+          return (_context.Pacientes?.Any(e => e.PacienteId == id)).GetValueOrDefault();
         }
     }
 }

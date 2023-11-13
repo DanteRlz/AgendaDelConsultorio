@@ -22,20 +22,20 @@ namespace AgendaDelConsultorio.Controllers
         // GET: TiposEspecialidades
         public async Task<IActionResult> Index()
         {
-              return _context.tiposespecialidads != null ? 
-                          View(await _context.tiposespecialidads.ToListAsync()) :
+              return _context.TiposEspecialidades != null ? 
+                          View(await _context.TiposEspecialidades.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.tiposespecialidads'  is null.");
         }
 
         // GET: TiposEspecialidades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.tiposespecialidads == null)
+            if (id == null || _context.TiposEspecialidades == null)
             {
                 return NotFound();
             }
 
-            var tiposespecialidad = await _context.tiposespecialidads
+            var tiposespecialidad = await _context.TiposEspecialidades
                 .FirstOrDefaultAsync(m => m.TipoEspecialidadId == id);
             if (tiposespecialidad == null)
             {
@@ -70,12 +70,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: TiposEspecialidades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.tiposespecialidads == null)
+            if (id == null || _context.TiposEspecialidades == null)
             {
                 return NotFound();
             }
 
-            var tiposespecialidad = await _context.tiposespecialidads.FindAsync(id);
+            var tiposespecialidad = await _context.TiposEspecialidades.FindAsync(id);
             if (tiposespecialidad == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: TiposEspecialidades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.tiposespecialidads == null)
+            if (id == null || _context.TiposEspecialidades == null)
             {
                 return NotFound();
             }
 
-            var tiposespecialidad = await _context.tiposespecialidads
+            var tiposespecialidad = await _context.TiposEspecialidades
                 .FirstOrDefaultAsync(m => m.TipoEspecialidadId == id);
             if (tiposespecialidad == null)
             {
@@ -141,14 +141,14 @@ namespace AgendaDelConsultorio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.tiposespecialidads == null)
+            if (_context.TiposEspecialidades == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.tiposespecialidads'  is null.");
             }
-            var tiposespecialidad = await _context.tiposespecialidads.FindAsync(id);
+            var tiposespecialidad = await _context.TiposEspecialidades.FindAsync(id);
             if (tiposespecialidad != null)
             {
-                _context.tiposespecialidads.Remove(tiposespecialidad);
+                _context.TiposEspecialidades.Remove(tiposespecialidad);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool tiposespecialidadExists(int id)
         {
-          return (_context.tiposespecialidads?.Any(e => e.TipoEspecialidadId == id)).GetValueOrDefault();
+          return (_context.TiposEspecialidades?.Any(e => e.TipoEspecialidadId == id)).GetValueOrDefault();
         }
     }
 }

@@ -1,12 +1,12 @@
 ﻿@model AgendaDelConsultorio.Models.paciente
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Añadir";
 }
 
-<h1>Create</h1>
+<h1>@ViewData["Title"]</h1>
 
-<h4>paciente</h4>
+<h4>Paciente</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -71,7 +71,7 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Añadir" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -81,6 +81,24 @@
     <a asp-action="Index">Volver</a>
 </div>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#ProvinciaId').change(function () {
+            var provinciaId = $(this).val();
+            $.getJSON('/Clientes/ObtenerLocalidadesPorProvincia', { provinciaId: provinciaId }, function (data) {
+                var localidadDropdown = $('#LocalidadId');
+                localidadDropdown.empty();
+                $.each(data, function (index, item) {
+                    localidadDropdown.append($('<option>', {
+                        value: item.localidadId,
+                        text: item.descripcion
+                    }));
+                });
+            });
+        });
+    });
+</script>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

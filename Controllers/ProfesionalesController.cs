@@ -22,19 +22,19 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Profesionales
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.profesionales.Include(p => p.Localidad).Include(p => p.Provincia);
+            var applicationDbContext = _context.Profesionales.Include(p => p.Localidad).Include(p => p.Provincia);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Profesionales/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.profesionales == null)
+            if (id == null || _context.Profesionales == null)
             {
                 return NotFound();
             }
 
-            var profesional = await _context.profesionales
+            var profesional = await _context.Profesionales
                 .Include(p => p.Localidad)
                 .Include(p => p.Provincia)
                 .FirstOrDefaultAsync(m => m.ProfesionalId == id);
@@ -49,8 +49,8 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Profesionales/Create
         public IActionResult Create()
         {
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Localidadid");
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId");
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId");
             return View();
         }
 
@@ -67,26 +67,26 @@ namespace AgendaDelConsultorio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }
 
         // GET: Profesionales/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.profesionales == null)
+            if (id == null || _context.Profesionales == null)
             {
                 return NotFound();
             }
 
-            var profesional = await _context.profesionales.FindAsync(id);
+            var profesional = await _context.Profesionales.FindAsync(id);
             if (profesional == null)
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }
 
@@ -122,20 +122,20 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }
 
         // GET: Profesionales/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.profesionales == null)
+            if (id == null || _context.Profesionales == null)
             {
                 return NotFound();
             }
 
-            var profesional = await _context.profesionales
+            var profesional = await _context.Profesionales
                 .Include(p => p.Localidad)
                 .Include(p => p.Provincia)
                 .FirstOrDefaultAsync(m => m.ProfesionalId == id);
@@ -152,14 +152,14 @@ namespace AgendaDelConsultorio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.profesionales == null)
+            if (_context.Profesionales == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.profesionales'  is null.");
             }
-            var profesional = await _context.profesionales.FindAsync(id);
+            var profesional = await _context.Profesionales.FindAsync(id);
             if (profesional != null)
             {
-                _context.profesionales.Remove(profesional);
+                _context.Profesionales.Remove(profesional);
             }
             
             await _context.SaveChangesAsync();
@@ -168,7 +168,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool ProfesionalExists(int id)
         {
-          return (_context.profesionales?.Any(e => e.ProfesionalId == id)).GetValueOrDefault();
+          return (_context.Profesionales?.Any(e => e.ProfesionalId == id)).GetValueOrDefault();
         }
     }
 }

@@ -22,20 +22,20 @@ namespace AgendaDelConsultorio.Controllers
         // GET: EstadosTurnos
         public async Task<IActionResult> Index()
         {
-              return _context.estadosturnos != null ? 
-                          View(await _context.estadosturnos.ToListAsync()) :
+              return _context.EstadosTurnos != null ? 
+                          View(await _context.EstadosTurnos.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.estadosturnos'  is null.");
         }
 
         // GET: EstadosTurnos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.estadosturnos == null)
+            if (id == null || _context.EstadosTurnos == null)
             {
                 return NotFound();
             }
 
-            var estadosturno = await _context.estadosturnos
+            var estadosturno = await _context.EstadosTurnos
                 .FirstOrDefaultAsync(m => m.EstadoTurnoId == id);
             if (estadosturno == null)
             {
@@ -70,12 +70,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: EstadosTurnos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.estadosturnos == null)
+            if (id == null || _context.EstadosTurnos == null)
             {
                 return NotFound();
             }
 
-            var estadosturno = await _context.estadosturnos.FindAsync(id);
+            var estadosturno = await _context.EstadosTurnos.FindAsync(id);
             if (estadosturno == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: EstadosTurnos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.estadosturnos == null)
+            if (id == null || _context.EstadosTurnos == null)
             {
                 return NotFound();
             }
 
-            var estadosturno = await _context.estadosturnos
+            var estadosturno = await _context.EstadosTurnos
                 .FirstOrDefaultAsync(m => m.EstadoTurnoId == id);
             if (estadosturno == null)
             {
@@ -141,14 +141,14 @@ namespace AgendaDelConsultorio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.estadosturnos == null)
+            if (_context.EstadosTurnos == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.estadosturnos'  is null.");
             }
-            var estadosturno = await _context.estadosturnos.FindAsync(id);
+            var estadosturno = await _context.EstadosTurnos.FindAsync(id);
             if (estadosturno != null)
             {
-                _context.estadosturnos.Remove(estadosturno);
+                _context.EstadosTurnos.Remove(estadosturno);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool estadosturnoExists(int id)
         {
-          return (_context.estadosturnos?.Any(e => e.EstadoTurnoId == id)).GetValueOrDefault();
+          return (_context.EstadosTurnos?.Any(e => e.EstadoTurnoId == id)).GetValueOrDefault();
         }
     }
 }

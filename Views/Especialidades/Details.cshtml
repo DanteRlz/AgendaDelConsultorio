@@ -1,10 +1,10 @@
 ﻿@model AgendaDelConsultorio.Models.Especialidad
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
+<h1>@ViewData["Title"]</h1>
 
 <div>
     <h4>Especialidad</h4>
@@ -38,11 +38,11 @@
             @Html.DisplayNameFor(model => model.TipoEspecialidad)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.TipoEspecialidad.TipoEspecialidadId)
+            @Html.DisplayFor(model => model.TipoEspecialidad.Descripcion)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.EspecialidadId">Edit</a> |
+    <a asp-action="Edit" asp-route-id="@Model?.EspecialidadId">Editar</a> |
     <a asp-action="Index">Volver</a>
 </div>

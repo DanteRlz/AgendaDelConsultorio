@@ -22,20 +22,20 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Provincias
         public async Task<IActionResult> Index()
         {
-              return _context.provincias != null ? 
-                          View(await _context.provincias.ToListAsync()) :
+              return _context.Provincias != null ? 
+                          View(await _context.Provincias.ToListAsync()) :
                           Problem("Entity set 'ApplicationDbContext.provincias'  is null.");
         }
 
         // GET: Provincias/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.provincias == null)
+            if (id == null || _context.Provincias == null)
             {
                 return NotFound();
             }
 
-            var provincia = await _context.provincias
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.ProvinciaId == id);
             if (provincia == null)
             {
@@ -70,12 +70,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Provincias/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.provincias == null)
+            if (id == null || _context.Provincias == null)
             {
                 return NotFound();
             }
 
-            var provincia = await _context.provincias.FindAsync(id);
+            var provincia = await _context.Provincias.FindAsync(id);
             if (provincia == null)
             {
                 return NotFound();
@@ -121,12 +121,12 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Provincias/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.provincias == null)
+            if (id == null || _context.Provincias == null)
             {
                 return NotFound();
             }
 
-            var provincia = await _context.provincias
+            var provincia = await _context.Provincias
                 .FirstOrDefaultAsync(m => m.ProvinciaId == id);
             if (provincia == null)
             {
@@ -141,14 +141,14 @@ namespace AgendaDelConsultorio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.provincias == null)
+            if (_context.Provincias == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.provincias'  is null.");
             }
-            var provincia = await _context.provincias.FindAsync(id);
+            var provincia = await _context.Provincias.FindAsync(id);
             if (provincia != null)
             {
-                _context.provincias.Remove(provincia);
+                _context.Provincias.Remove(provincia);
             }
             
             await _context.SaveChangesAsync();
@@ -157,7 +157,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool provinciaExists(int id)
         {
-          return (_context.provincias?.Any(e => e.ProvinciaId == id)).GetValueOrDefault();
+          return (_context.Provincias?.Any(e => e.ProvinciaId == id)).GetValueOrDefault();
         }
     }
 }

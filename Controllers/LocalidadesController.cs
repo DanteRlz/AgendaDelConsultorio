@@ -22,19 +22,19 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Localidades
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.localidades.Include(l => l.Provincia);
+            var applicationDbContext = _context.Localidades.Include(l => l.Provincia);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Localidades/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.localidades == null)
+            if (id == null || _context.Localidades == null)
             {
                 return NotFound();
             }
 
-            var localidad = await _context.localidades
+            var localidad = await _context.Localidades
                 .Include(l => l.Provincia)
                 .FirstOrDefaultAsync(m => m.Localidadid == id);
             if (localidad == null)
@@ -48,7 +48,7 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Localidades/Create
         public IActionResult Create()
         {
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId");
             return View();
         }
 
@@ -65,24 +65,24 @@ namespace AgendaDelConsultorio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
             return View(localidad);
         }
 
         // GET: Localidades/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.localidades == null)
+            if (id == null || _context.Localidades == null)
             {
                 return NotFound();
             }
 
-            var localidad = await _context.localidades.FindAsync(id);
+            var localidad = await _context.Localidades.FindAsync(id);
             if (localidad == null)
             {
                 return NotFound();
             }
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
             return View(localidad);
         }
 
@@ -118,19 +118,19 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ProvinciaId"] = new SelectList(_context.provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", localidad.ProvinciaId);
             return View(localidad);
         }
 
         // GET: Localidades/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.localidades == null)
+            if (id == null || _context.Localidades == null)
             {
                 return NotFound();
             }
 
-            var localidad = await _context.localidades
+            var localidad = await _context.Localidades
                 .Include(l => l.Provincia)
                 .FirstOrDefaultAsync(m => m.Localidadid == id);
             if (localidad == null)
@@ -146,14 +146,14 @@ namespace AgendaDelConsultorio.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.localidades == null)
+            if (_context.Localidades == null)
             {
                 return Problem("Entity set 'ApplicationDbContext.localidades'  is null.");
             }
-            var localidad = await _context.localidades.FindAsync(id);
+            var localidad = await _context.Localidades.FindAsync(id);
             if (localidad != null)
             {
-                _context.localidades.Remove(localidad);
+                _context.Localidades.Remove(localidad);
             }
             
             await _context.SaveChangesAsync();
@@ -162,7 +162,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool LocalidadExists(int id)
         {
-          return (_context.localidades?.Any(e => e.Localidadid == id)).GetValueOrDefault();
+          return (_context.Localidades?.Any(e => e.Localidadid == id)).GetValueOrDefault();
         }
     }
 }

@@ -17,14 +17,14 @@ namespace AgendaDelConsultorio.Data
         {
         }
 
-        public virtual DbSet<Especialidad> especialidades { get; set; } = null!;
-        public virtual DbSet<estadosturno> estadosturnos { get; set; } = null!;
-        public virtual DbSet<Localidad> localidades { get; set; } = null!;
-        public virtual DbSet<paciente> pacientes { get; set; } = null!;
-        public virtual DbSet<Profesional> profesionales { get; set; } = null!;
-        public virtual DbSet<provincia> provincias { get; set; } = null!;
-        public virtual DbSet<tiposespecialidad> tiposespecialidads { get; set; } = null!;
-        public virtual DbSet<turno> turnos { get; set; } = null!;
+        public virtual DbSet<Especialidad> Especialidades { get; set; } = null!;
+        public virtual DbSet<estadosturno> EstadosTurnos { get; set; } = null!;
+        public virtual DbSet<Localidad> Localidades { get; set; } = null!;
+        public virtual DbSet<paciente> Pacientes { get; set; } = null!;
+        public virtual DbSet<Profesional> Profesionales { get; set; } = null!;
+        public virtual DbSet<provincia> Provincias { get; set; } = null!;
+        public virtual DbSet<tiposespecialidad> TiposEspecialidades { get; set; } = null!;
+        public virtual DbSet<turno> Turnos { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

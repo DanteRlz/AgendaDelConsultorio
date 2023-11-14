@@ -12,14 +12,15 @@ namespace AgendaDelConsultorio.Models
             profesionales = new HashSet<Profesional>();
         }
         [Key]
-        public int Localidadid { get; set; }
+        public int LocalidadId { get; set; }
         [Display (Name = "Provincia")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public int ProvinciaId { get; set; }
         [Display (Name = "Descripción")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Descripcion { get; set; } = null!;
 
-        public virtual provincia? Provincia { get; set; } = null!;
+        public virtual provincia Provincia { get; set; } = null!;
         public virtual ICollection<paciente>? pacientes { get; set; }
         public virtual ICollection<Profesional>? profesionales { get; set; }
     }

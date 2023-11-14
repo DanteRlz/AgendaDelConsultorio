@@ -49,7 +49,7 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Profesionales/Create
         public IActionResult Create()
         {
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid");
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "LocalidadId");
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId");
             return View();
         }
@@ -67,7 +67,7 @@ namespace AgendaDelConsultorio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "LocalidadId", profesional.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }
@@ -85,7 +85,7 @@ namespace AgendaDelConsultorio.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "LocalidadId", profesional.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }
@@ -122,7 +122,7 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Localidadid", profesional.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "LocalidadId", profesional.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "ProvinciaId", profesional.ProvinciaId);
             return View(profesional);
         }

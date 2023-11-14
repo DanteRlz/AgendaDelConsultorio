@@ -13,7 +13,7 @@ namespace AgendaDelConsultorio.Models
         [Key]
         public int EstadoTurnoId { get; set; }
         [Display (Name = "Descripción")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Descripcion { get; set; } = null!;
 
         public virtual ICollection<turno>? turnos { get; set; }

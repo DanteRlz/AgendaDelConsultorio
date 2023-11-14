@@ -1,0 +1,191 @@
+﻿@model AgendaDelConsultorio.Models.GenerarTurnosLibresModel
+@{
+	ViewData["Title"] = "Generar Turnos Libres";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (ViewBag.Message != null)
+{
+	<div class="alert alert-success">
+		@ViewBag.Message
+	</div>
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+	<!-- FechaTurnoDesde -->
+	<div class="form-group">
+		<label asp-for="FechaTurnoDesde" class="control-label"></label>
+		<input asp-for="FechaTurnoDesde" class="form-control" type="date" />
+		<span asp-validation-for="FechaTurnoDesde" class="text-danger"></span>
+	</div>
+
+	<!-- FechaTurnoHasta -->
+	<div class="form-group">
+		<label asp-for="FechaTurnoHasta" class="control-label"></label>
+		<input asp-for="FechaTurnoHasta" class="form-control" type="date" />
+		<span asp-validation-for="FechaTurnoHasta" class="text-danger"></span>
+	</div>
+
+	<!-- HoraTurnoDesde -->
+	<div class="form-group">
+		<label asp-for="HoraTurnoDesde" class="control-label"></label>
+		<input asp-for="HoraTurnoDesde" class="form-control" type="time" />
+		<span asp-validation-for="HoraTurnoDesde" class="text-danger"></span>
+	</div>
+
+	<!-- HoraTurnoHasta -->
+	<div class="form-group">
+		<label asp-for="HoraTurnoHasta" class="control-label"></label>
+		<input asp-for="HoraTurnoHasta" class="form-control" type="time" />
+		<span asp-validation-for="HoraTurnoHasta" class="text-danger"></span>
+	</div>
+
+	<!-- Intervalo -->
+	<div class="form-group">
+		<label asp-for="Intervalo" class="control-label"></label>
+		<input asp-for="Intervalo" class="form-control" type="time" />
+		<span asp-validation-for="Intervalo" class="text-danger"></span>
+	</div>
+
+	<!-- Checkbox para los días de la semana -->
+	@* 	<div class="form-group">
+		<div class="form-check">
+			<input asp-for="Lunes" class="form-check-input" />
+			<label asp-for="Lunes" class="form-check-label"></label>
+		</div>
+
+		<!-- Martes -->
+		<div class="form-check">
+			<input asp-for="Martes" class="form-check-input" />
+			<label asp-for="Martes" class="form-check-label"></label>
+		</div>
+
+		<!-- Miercoles -->
+		<div class="form-check">
+			<input asp-for="Miercoles" class="form-check-input" />
+			<label asp-for="Miercoles" class="form-check-label"></label>
+		</div>
+
+		<!-- Jueves -->
+		<div class="form-check">
+			<input asp-for="Jueves" class="form-check-input" />
+			<label asp-for="Jueves" class="form-check-label"></label>
+		</div>
+
+		<!-- Viernes -->
+		<div class="form-check">
+			<input asp-for="Viernes" class="form-check-input" />
+			<label asp-for="Viernes" class="form-check-label"></label>
+		</div>
+
+		<!-- Sabado -->
+		<div class="form-check">
+			<input asp-for="Sabado" class="form-check-input" />
+			<label asp-for="Sabado" class="form-check-label"></label>
+		</div>
+
+		<!-- Domingo -->
+		<div class="form-check">
+			<input asp-for="Domingo" class="form-check-input" />
+			<label asp-for="Domingo" class="form-check-label"></label>
+		</div>
+	</div>
+ *@
+
+	<!-- Checkbox para seleccionar/deseleccionar todos los días -->
+	<div class="form-check mb-3">
+		<input type="checkbox" class="form-check-input" id="selectAllDays">
+		<label class="form-check-label" for="selectAllDays">Seleccionar Todos los Días</label>
+	</div>
+
+	<div class="row mb-3">
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Lunes)
+			@Html.LabelFor(model => model.Lunes)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Martes)
+			@Html.LabelFor(model => model.Martes)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Miercoles)
+			@Html.LabelFor(model => model.Miercoles)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Jueves)
+			@Html.LabelFor(model => model.Jueves)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Viernes)
+			@Html.LabelFor(model => model.Viernes)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Sabado)
+			@Html.LabelFor(model => model.Sabado)
+		</div>
+		<div class="col">
+			@Html.CheckBoxFor(model => model.Domingo)
+			@Html.LabelFor(model => model.Domingo)
+		</div>
+	</div>
+
+	<div class="mt-4">
+		<button type="button" class="btn btn-primary" id="generateButton" data-bs-toggle="modal" data-bs-target="#confirmModal">
+			Generar Turnos
+		</button>
+	</div>
+}
+
+<!-- Modal de Confirmación -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmModalLabel">Confirmar Acción</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				¿Confirma generar los turnos libres?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+				<button type="button" class="btn btn-primary" id="confirmBtn">Confirmar</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+		<script type="text/javascript">
+			$(document).ready(function () {
+
+				// Script para manejar clic en el botón de confirmación
+				$('#confirmBtn').click(function () {
+					// Cerrar el modal
+					$('#confirmModal').modal('hide');
+
+					// Enviar el formulario
+					$('form').submit();
+				});
+
+
+				// Script para seleccionar/deseleccionar todos los días
+				$('#selectAllDays').change(function () {
+					var isChecked = $(this).is(':checked');
+					$('.row .col input[type="checkbox"]').prop('checked', isChecked);
+				});
+
+			});
+		</script>
+
+	}
+}

@@ -9,193 +9,201 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AgendaDelConsultorio
 build_property.RootNamespace = AgendaDelConsultorio
-build_property.ProjectDir = C:\Users\dante\OneDrive\Documents\AgendaDelConsultorio\AgendaDelConsultorio\
+build_property.ProjectDir = C:\Users\dante\OneDrive\Documents\.Net\C#\AgendaDelConsultorio\AgendaDelConsultorio\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\dante\OneDrive\Documents\AgendaDelConsultorio\AgendaDelConsultorio
+build_property.MSBuildProjectDirectory = C:\Users\dante\OneDrive\Documents\.Net\C#\AgendaDelConsultorio\AgendaDelConsultorio
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpZGFkZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpZGFkZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpZGFkZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpZGFkZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Especialidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXNwZWNpYWxpZGFkZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRvc1R1cm5vc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRvc1R1cm5vc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRvc1R1cm5vc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRvc1R1cm5vc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/EstadosTurnos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXN0YWRvc1R1cm5vc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Home/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Ingreso/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5ncmVzb1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Localidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTG9jYWxpZGFkZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXENyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXERlbGV0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXERldGFpbHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXEVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/Registrar.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXFJlZ2lzdHJhci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Pacientes/RegistroExitoso.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFjaWVudGVzXFJlZ2lzdHJvRXhpdG9zby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmVzaW9uYWxlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmVzaW9uYWxlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmVzaW9uYWxlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmVzaW9uYWxlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Profesionales/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZmVzaW9uYWxlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Provincias/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvdmluY2lhc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/Error.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Create.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NFc3BlY2lhbGlkYWRlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Delete.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NFc3BlY2lhbGlkYWRlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Details.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NFc3BlY2lhbGlkYWRlc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Edit.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NFc3BlY2lhbGlkYWRlc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Index.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/TiposEspecialidades/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGlwb3NFc3BlY2lhbGlkYWRlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXENyZWF0ZS5jc2h0bWw=
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/BuscarPaciente.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXEJ1c2NhclBhY2llbnRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXERlbGV0ZS5jc2h0bWw=
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/GenerarTurnosLibres.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXEdlbmVyYXJUdXJub3NMaWJyZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXERldGFpbHMuY3NodG1s
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/IniciarReservaTurno.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXEluaWNpYXJSZXNlcnZhVHVybm8uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXEVkaXQuY3NodG1s
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/TurnoReservado.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXFR1cm5vUmVzZXJ2YWRvLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Turnos/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVHVybm9zXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/_ViewImports.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/_ViewStart.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/dante/OneDrive/Documents/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/_Layout.cshtml]
+[C:/Users/dante/OneDrive/Documents/.Net/C\#/AgendaDelConsultorio/AgendaDelConsultorio/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-qd1eeb4u6h

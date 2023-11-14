@@ -1,0 +1,103 @@
+﻿@model AgendaDelConsultorio.Models.paciente
+
+@{
+	ViewBag.Title = "Registrar Paciente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Registrar">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Apellido" class="control-label"></label>
+                <input asp-for="Apellido" class="form-control" />
+                <span asp-validation-for="Apellido" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaNacimiento" class="control-label"></label>
+                <input asp-for="FechaNacimiento" class="form-control" />
+                <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TipoDocumento" class="control-label"></label>
+                <input asp-for="TipoDocumento" class="form-control" />
+                <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NumeroDocumento" class="control-label"></label>
+                <input asp-for="NumeroDocumento" class="form-control" />
+                <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Calle" class="control-label"></label>
+                <input asp-for="Calle" class="form-control" />
+                <span asp-validation-for="Calle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Altura" class="control-label"></label>
+                <input asp-for="Altura" class="form-control" />
+                <span asp-validation-for="Altura" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinciaId" class="control-label"></label>
+                <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="LocalidadId" class="control-label"></label>
+                <select asp-for="LocalidadId" class="form-control" asp-items="ViewBag.LocalidadId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CodigoPostal" class="control-label"></label>
+                <input asp-for="CodigoPostal" class="form-control" />
+                <span asp-validation-for="CodigoPostal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CorreoElectronico" class="control-label"></label>
+                <input asp-for="CorreoElectronico" class="form-control" />
+                <span asp-validation-for="CorreoElectronico" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label"></label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Registrar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#ProvinciaId').change(function () {
+            var provinciaId = $(this).val();
+            $.getJSON('/Pacientes/ObtenerLocalidadesPorProvincia', { provinciaId: provinciaId }, function (data) {
+                var localidadDropdown = $('#LocalidadId');
+                localidadDropdown.empty();
+                $.each(data, function (index, item) {
+                    localidadDropdown.append($('<option>', {
+                        value: item.LocalidadId,
+                        text: item.descripcion
+                    }));
+                });
+            });
+        });
+    });
+</script>

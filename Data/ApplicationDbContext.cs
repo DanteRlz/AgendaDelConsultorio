@@ -66,8 +66,8 @@ namespace AgendaDelConsultorio.Data
 
             modelBuilder.Entity<Localidad>(entity =>
             {
-                entity.HasKey(e => e.Localidadid)
-                    .HasName("PK_localidades_Localidadid");
+                entity.HasKey(e => e.LocalidadId)
+                    .HasName("PK_localidades_LocalidadId");
 
                 entity.ToTable("localidades", "agendadeconsultorio");
 

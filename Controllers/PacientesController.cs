@@ -49,7 +49,7 @@ namespace AgendaDelConsultorio.Controllers
         // GET: Pacientes/Create
         public IActionResult Create()
         {
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion");
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion");
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion");
             return View();
         }
@@ -67,7 +67,7 @@ namespace AgendaDelConsultorio.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion", paciente.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
@@ -85,7 +85,7 @@ namespace AgendaDelConsultorio.Controllers
             {
                 return NotFound();
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion", paciente.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
@@ -122,7 +122,7 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "Localidadid", "Descripcion", paciente.LocalidadId);
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion", paciente.LocalidadId);
             ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion", paciente.ProvinciaId);
             return View(paciente);
         }
@@ -152,7 +152,7 @@ namespace AgendaDelConsultorio.Controllers
         {
             var localidades = await _context.Localidades
                 .Where(l => l.ProvinciaId == provinciaId)
-                .Select(l => new {l.Localidadid, l.Descripcion})
+                .Select(l => new {l.LocalidadId, l.Descripcion})
                 .ToListAsync();
 
             return Json(localidades);
@@ -180,5 +180,72 @@ namespace AgendaDelConsultorio.Controllers
         {
           return (_context.Pacientes?.Any(e => e.PacienteId == id)).GetValueOrDefault();
         }
+
+                // GET: Clientes/Registrar
+        public IActionResult Registrar()
+        {
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion");
+            ViewBag.HideHeader = true;
+            return View();
+        }
+
+
+        // POST: Clientes/Registrar
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Registrar([Bind("PacienteId,Apellido,Nombre,FechaNacimiento,TipoDocumento,NumeroDocumento,Calle,Altura,ProvinciaId,LocalidadId,CodigoPostal,CorreoElectronico,Telefono")] paciente paciente)
+        {
+            // En caso de error en la validación, repoblar las listas desplegables y mostrar el formulario nuevamente
+            ViewData["LocalidadId"] = new SelectList(_context.Localidades, "LocalidadId", "Descripcion");
+            ViewData["ProvinciaId"] = new SelectList(_context.Provincias, "ProvinciaId", "Descripcion");
+            // Validar el modelo del paciente proporcionado
+            if (ModelState.IsValid)
+            {
+                // Verificar si el número de documento o correo electrónico ya están registrados
+                bool documentoExiste = (from c in _context.Pacientes
+                                        where c.NumeroDocumento == paciente.NumeroDocumento
+                                        select c).Any();
+
+                bool correoExiste = (from c in _context.Pacientes
+                                     where c.CorreoElectronico == paciente.CorreoElectronico
+                                     select c).Any();
+
+
+                if (documentoExiste)
+                {
+                    ModelState.AddModelError("NumeroDocumento", "El número de documento ya está registrado en la base de datos.");
+                }
+
+                if (correoExiste)
+                {
+                    ModelState.AddModelError("CorreoElectronico", "El correo electrónico ya está registrado en la base de datos.");
+                }
+
+                if (!documentoExiste && !correoExiste)
+                {
+
+                    // Agregar el cliente al contexto y guardar cambios
+                    _context.Add(paciente);
+                    await _context.SaveChangesAsync();
+
+                    // Redirigir al Index después de crear exitosamente
+                    return RedirectToAction(nameof(RegistroExitoso));
+                }
+            }
+
+          
+
+            ViewBag.HideHeader = true;
+            return View(paciente);
+        }
+
+        public IActionResult RegistroExitoso()
+        {
+            ViewBag.HideHeader = true;
+            ViewBag.Message = "El registro se ha completado con éxito.";
+            return View();
+        }
     }
 }
+

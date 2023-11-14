@@ -8,268 +8,349 @@ using Microsoft.EntityFrameworkCore;
 using AgendaDelConsultorio.Data;
 using AgendaDelConsultorio.Models;
 using System.Globalization;
+using Microsoft.Data.SqlClient;
 
 namespace AgendaDelConsultorio.Controllers
 {
-    public class TurnosController : Controller
-    {
-        private readonly ApplicationDbContext _context;
+	public class TurnosController : Controller
+	{
+		private readonly ApplicationDbContext _context;
 
-        public TurnosController(ApplicationDbContext context)
-        {
-            _context = context;
-        }
+		public TurnosController(ApplicationDbContext context)
+		{
+			_context = context;
+		}
 
-        // GET: Turnos
-        public async Task<IActionResult> Index()
-        {
-            var PacienteId = 18;
-            var paciente = await _context.Pacientes
-                .Include(p => p.Localidad)
-                .Include(p => p.Provincia)
-                .FirstOrDefaultAsync(m => m.PacienteId == PacienteId);
+		// GET: Turnos
+		public async Task<IActionResult> Index()
+		{
+			return RedirectToAction("Index", "Ingreso");
+		}
 
-            ViewData["SelectListTipoEspecialidades"] = new SelectList(_context.TiposEspecialidades, "TipoEspecialidadId", "Descripcion");
-            ViewData["SelectListEspecialidades"] = new SelectList(_context.Especialidades, "EspecialidadId", "Descripcion");
+		private List<tiposespecialidad> ObtenerTiposDeEspecialidad()
+		{
+			var tiposEspecialidades =
+				(
+				from t in _context.TiposEspecialidades
+				orderby t.Descripcion
+				select t
+				).ToList();
 
-            var reservaTurno = new ReservaTurno();
-            reservaTurno.PacienteId = PacienteId;
-            reservaTurno.Paciente = paciente;
+			return tiposEspecialidades;
+		}
 
-            var fechas = ObtenerFechasLibresDelMesActual();
-            var fechasFormateadas = fechas.Select(fecha => fecha.ToString("dd/mm/yyyy").ToList());
+		private List<Especialidad> ObtenerEspecialidadPorTipoEspecialidad(int tipoEspecialidadId)
+		{
+			var especialidades =
+				(
+				from s in _context.Especialidades
+				where s.TipoEspecialidadId == tipoEspecialidadId
+				orderby s.Descripcion
+				select s
+				).ToList();
 
-            ViewData["SelectListFechas"] = new SelectList(fechasFormateadas);
+			return especialidades;
+		}
 
-            var fechaHoy = fechas[0].ToString("dd/mm/yyyy");
-            var listaHoras = ObtenerHorasLibresPorFecha(fechaHoy);
+		[HttpGet]
 
-            ViewData["SelectListHoras"] = new SelectList(listaHoras);
+		public async Task<JsonResult> ObtenerJsonEspecialidadPorTipoEspecialidad(int tipoEspecialidadId)
+		{
+			var especialidad =
+				(
+				from s in ObtenerEspecialidadPorTipoEspecialidad(tipoEspecialidadId)
+				select new { s.EspecialidadId, s.Descripcion }
+				).ToList();
 
-            return View(reservaTurno);
-        }
+			return Json(especialidad);
+		}
 
-        [HttpGet]
+		private paciente? ObtenerPacientePorId(int pacienteId)
+		{
+			var paciente = _context.Pacientes
+				.Include(c => c.Localidad)
+				.Include(c => c.Provincia)
+				.FirstOrDefault(m => m.PacienteId == pacienteId);
 
-        public async Task<IActionResult> ObtenerEspecialidadPorTipoEspecialidad(int TipoEspecialidadId)
-        {
-            var especialidades = await _context.Especialidades
-                .Where(e => e.TipoEspecialidadId == TipoEspecialidadId)
-                .Select(e => new { e.EspecialidadId, e.Descripcion })
-                .ToListAsync();
+			return paciente;
+		}
 
-            return Json(especialidades);
-        }
+		#region ObtenerFechasDisponiblesDeTurnosProximos60Dias
+		public List<DateTime> ObtenerFechasDisponiblesDeTurnosProximos60Dias(DateTime fecha)
+		{
+			var fechaDesde = fecha.Date; // Calcula la fecha mínima (fecha dada)
+			var fechaHasta = fecha.AddDays(60).Date; // Calcula la fecha máxima (60 días después de la fecha dada)
 
-        public List<DateTime> ObtenerFechasLibresDelMesActual()
-        {
-            var diaDeHoy = DateTime.Now.Date;
-            var primerDiaMesVigente = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
-            var ultimoDiaMesVigente = primerDiaMesVigente.AddMonths(1).AddDays(-1);
+			var fechas = (from t in _context.Turnos
+						  where t.FechaTurno.Date >= fechaDesde &&
+								t.FechaTurno.Date < fechaHasta &&
+								t.EstadoTurnoId == (int)EstadoTurnoEnum.Libre
+						  group t by t.FechaTurno.Date into grouped
+						  orderby grouped.Key
+						  select grouped.Key).ToList();
+			return fechas;
+		}
 
-            const int estadoTurnoIdLibre = 1;
-            var fechas = _context.Turnos
-                .Where(f => f.FechaTurno.Date == diaDeHoy
-                            && f.FechaTurno.Date < ultimoDiaMesVigente
-                            && f.EstadoTurnoId == estadoTurnoIdLibre)
-                .GroupBy(f => f.FechaTurno.Date)
-                .OrderBy(g => g.Key)
-                .Select(g => g.Key)
-                .ToList();
+		public List<DateTime> ObtenerFechasDisponiblesDeTurnosProximos60Dias(int año, int mes, int dia)
+		{
+			var fecha = new DateTime(año, mes, dia);
+			return ObtenerFechasDisponiblesDeTurnosProximos60Dias(fecha);
+		}
 
-            return fechas;
-        }
+		public List<DateTime> ObtenerFechasDisponiblesDeTurnosProximos60Dias(string fecha)
+		{
+			var fechaConvertida = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+			return ObtenerFechasDisponiblesDeTurnosProximos60Dias(fechaConvertida);
+		}
 
-        public List<String> ObtenerHorasLibresPorFecha(String fecha)
-        {
-            var fechaTurno = DateTime.ParseExact(fecha,"dd/mm/yyyy",
-                CultureInfo.InvariantCulture);
-            const int estadoTurnoIdLibre = 1;
+		[HttpGet]
+		public JsonResult ObtenerJsonDeFechasDisponiblesFormateadasYYYYMMDDProximos60Dias(int año, int mes, int dia)
+		{
+			var fecha = new DateTime(año, mes, dia);
+			var fechas = ObtenerFechasDisponiblesDeTurnosProximos60Dias(fecha);
+			var fechasFormateadas = FormatearFechasAStringYYYYMMDD(fechas);
 
-            var horas = from t in _context.Turnos
-                        where t.FechaTurno.Date == fechaTurno.Date
-                                                && t.EstadoTurnoId == estadoTurnoIdLibre
-                        orderby t.HoraTurno
-                        select t.HoraTurno;
+			return Json(fechasFormateadas);
+		}
+		#endregion
 
-            return horas.ToList().Select(h => h.ToString(@"hh\:mm")).ToList();
-        }
+		#region ObtenerHorasDisponiblesDeTurnosPorFecha
+		public List<TimeSpan> ObtenerHorasDisponiblesDeTurnosPorFecha(DateTime fecha)
+		{
+			var horas = (from t in _context.Turnos
+						 where t.FechaTurno.Date == fecha.Date && t.EstadoTurnoId == (int)EstadoTurnoEnum.Libre
+						 orderby t.HoraTurno
+						 select t.HoraTurno).ToList();
+			return horas;
+		}
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ReservarTurno(ReservaTurno model)
-        {
-            const int estadoTurnoIdLibre = 1;
+		public List<TimeSpan> ObtenerHorasDisponiblesDeTurnosPorFecha(int año, int mes, int dia)
+		{
+			var fecha = new DateTime(año, mes, dia);
+			return ObtenerHorasDisponiblesDeTurnosPorFecha(fecha);
+		}
 
-            var turnoExistente = await (from t in _context.Turnos
-                                        where t.FechaTurno == model.FechaTurno
-                                              && t.HoraTurno == model.HoraTurno
-                                              && t.EstadoTurnoId == estadoTurnoIdLibre
-                                        select t).FirstOrDefaultAsync();
+		public List<TimeSpan> ObtenerHorasDisponiblesDeTurnosPorFecha(string fecha)
+		{
+			var fechaConvertida = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+			return ObtenerHorasDisponiblesDeTurnosPorFecha(fechaConvertida);
+		}
 
-            if (turnoExistente == null)
-            {
-                turnoExistente.PacienteId = model.PacienteId;
-                turnoExistente.EspecialidadId = model.EspecialidadId;
-                turnoExistente.Observacion = model.Observacion;
-                turnoExistente.EstadoTurnoId = 2;
+		public List<string> ObtenerHorasDisponiblesDeTurnosFormateadasPorFecha(string fecha)
+		{
+			var fechaConvertida = DateTime.ParseExact(fecha, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+			var horas = ObtenerHorasDisponiblesDeTurnosPorFecha(fechaConvertida);
 
-                _context.Update(turnoExistente);
-                await _context.SaveChangesAsync(); 
+			var horasFormateadas = FormatearHorasAString(horas);
+			return horasFormateadas;
+		}
 
-                return RedirectToAction("Index", "Home");
-            }
-        }
+		#endregion
 
-        // GET: Turnos/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.Turnos == null)
-            {
-                return NotFound();
-            }
+		#region Formatear las fecha y horas a string
+		private static List<string> FormatearFechasAStringDDMMYYYY(List<DateTime> listaFechas)
+		{
+			var fechasFormateadas =
+				(
+				from f in listaFechas
+				select f.ToString("dd/MM/yyyy")
+				).ToList();
 
-            var turno = await _context.Turnos
-                .Include(t => t.Especialidad)
-                .Include(t => t.EstadoTurno)
-                .Include(t => t.Paciente)
-                .FirstOrDefaultAsync(m => m.TurnoId == id);
-            if (turno == null)
-            {
-                return NotFound();
-            }
+			return fechasFormateadas;
+		}
 
-            return View(turno);
-        }
+		private static List<string> FormatearFechasAStringYYYYMMDD(List<DateTime> listaFechas)
+		{
+			var fechasFormateadas =
+				(
+				from f in listaFechas
+				select f.ToString("yyyy-MM-dd")
+				).ToList();
 
-        // GET: Turnos/Create
-        public IActionResult Create()
-        {
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "EspecialidadId", "EspecialidadId");
-            ViewData["EstadoTurnoId"] = new SelectList(_context.EstadosTurnos, "EstadoTurnoId", "EstadoTurnoId");
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId");
-            return View();
-        }
+			return fechasFormateadas;
+		}
 
-        // POST: Turnos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TurnoId,FechaTurno,HoraTurno,EstadoTurnoId,PacienteId,EspecialidadId,Observacion")] turno turno)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(turno);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "EspecialidadId", "EspecialidadId", turno.EspecialidadId);
-            ViewData["EstadoTurnoId"] = new SelectList(_context.EstadosTurnos, "EstadoTurnoId", "EstadoTurnoId", turno.EstadoTurnoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", turno.PacienteId);
-            return View(turno);
-        }
+		private static List<string> FormatearHorasAString(List<TimeSpan> listaHoras)
+		{
+			var horasFormateadas =
+				(
+				from h in listaHoras
+				select h.ToString(@"hh\:mm")
+				).ToList();
 
-        // GET: Turnos/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null || _context.Turnos == null)
-            {
-                return NotFound();
-            }
+			return horasFormateadas;
+		}
+		#endregion
+		//public List<DateTime> ObtenerFechasLibresDelMesActual()
+		//{
+		//    var diaDeHoy = DateTime.Now.Date;
+		//    var primerDiaMesVigente = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+		//    var ultimoDiaMesVigente = primerDiaMesVigente.AddMonths(1).AddDays(-1);
 
-            var turno = await _context.Turnos.FindAsync(id);
-            if (turno == null)
-            {
-                return NotFound();
-            }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "EspecialidadId", "EspecialidadId", turno.EspecialidadId);
-            ViewData["EstadoTurnoId"] = new SelectList(_context.EstadosTurnos, "EstadoTurnoId", "EstadoTurnoId", turno.EstadoTurnoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", turno.PacienteId);
-            return View(turno);
-        }
+		//    const int estadoTurnoIdLibre = 1;
+		//    var fechas = _context.Turnos
+		//        .Where(f => f.FechaTurno.Date == diaDeHoy
+		//                    && f.FechaTurno.Date < ultimoDiaMesVigente
+		//                    && f.EstadoTurnoId == estadoTurnoIdLibre)
+		//        .GroupBy(f => f.FechaTurno.Date)
+		//        .OrderBy(g => g.Key)
+		//        .Select(g => g.Key)
+		//        .ToList();
 
-        // POST: Turnos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TurnoId,FechaTurno,HoraTurno,EstadoTurnoId,PacienteId,EspecialidadId,Observacion")] turno turno)
-        {
-            if (id != turno.TurnoId)
-            {
-                return NotFound();
-            }
+		//    return fechas;
+		//}
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(turno);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!turnoExists(turno.TurnoId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            ViewData["EspecialidadId"] = new SelectList(_context.Especialidades, "EspecialidadId", "EspecialidadId", turno.EspecialidadId);
-            ViewData["EstadoTurnoId"] = new SelectList(_context.EstadosTurnos, "EstadoTurnoId", "EstadoTurnoId", turno.EstadoTurnoId);
-            ViewData["PacienteId"] = new SelectList(_context.Pacientes, "PacienteId", "PacienteId", turno.PacienteId);
-            return View(turno);
-        }
+		//public List<String> ObtenerHorasLibresPorFecha(String fecha)
+		//{
+		//    var fechaTurno = DateTime.ParseExact(fecha,"dd/mm/yyyy",
+		//        CultureInfo.InvariantCulture);
+		//    const int estadoTurnoIdLibre = 1;
 
-        // GET: Turnos/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null || _context.Turnos == null)
-            {
-                return NotFound();
-            }
+		//    var horas = from t in _context.Turnos
+		//                where t.FechaTurno.Date == fechaTurno.Date
+		//                                        && t.EstadoTurnoId == estadoTurnoIdLibre
+		//                orderby t.HoraTurno
+		//                select t.HoraTurno;
 
-            var turno = await _context.Turnos
-                .Include(t => t.Especialidad)
-                .Include(t => t.EstadoTurno)
-                .Include(t => t.Paciente)
-                .FirstOrDefaultAsync(m => m.TurnoId == id);
-            if (turno == null)
-            {
-                return NotFound();
-            }
+		//    return horas.ToList().Select(h => h.ToString(@"hh\:mm")).ToList();
+		//}
+		[HttpPost]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> ReservarTurno(ReservaTurno model)
+		{
+			// Buscar el turno por fecha, hora y estado
+			var turnoExistente = await (from t in _context.Turnos
+										where t.FechaTurno == model.FechaTurno
+										   && t.HoraTurno == model.HoraTurno
+										   && t.EstadoTurnoId == (int)EstadoTurnoEnum.Libre
+										select t).FirstOrDefaultAsync();
 
-            return View(turno);
-        }
+			if (turnoExistente != null)
+			{
+				// Actualizar el turno con los datos del modelo
+				turnoExistente.PacienteId = model.PacienteId;
+				turnoExistente.FechaTurno = model.FechaTurno;
+				turnoExistente.HoraTurno = model.HoraTurno;
+				turnoExistente.EspecialidadId = model.EspecialidadId;
+				turnoExistente.Observacion = model.Observacion;
+				turnoExistente.EstadoTurnoId = (int)EstadoTurnoEnum.Pendiente;
 
-        // POST: Turnos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            if (_context.Turnos == null)
-            {
-                return Problem("Entity set 'ApplicationDbContext.turnos'  is null.");
-            }
-            var turno = await _context.Turnos.FindAsync(id);
-            if (turno != null)
-            {
-                _context.Turnos.Remove(turno);
-            }
-            
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+				// Guardar los cambios en la base de datos
+				_context.Update(turnoExistente);
+				await _context.SaveChangesAsync();
 
-        private bool turnoExists(int id)
-        {
-          return (_context.Turnos?.Any(e => e.TurnoId == id)).GetValueOrDefault();
-        }
-    }
+				// Pasamos el modelo a la vista 'TurnoReservado'.
+				ViewBag.HideHeader = true;
+				return View("TurnoReservado", model);
+
+			}
+			return View(model);
+		}
+
+		[HttpGet]
+		public IActionResult BuscarPaciente()
+		{
+			ViewBag.HideHeader = true;
+			return View();
+		}
+		[HttpPost]
+		public IActionResult BuscarPaciente(string numeroDocumento, string email)
+		{
+			var paciente = (from c in _context.Pacientes
+							where c.NumeroDocumento.ToString() == numeroDocumento || c.CorreoElectronico == email
+							select c).FirstOrDefault();
+
+			ViewBag.HideHeader = true;
+
+			if (paciente == null)
+			{
+				ViewBag.ErrorMessage = "Paciente no encontrado";
+				return View();
+			}
+
+			return View(paciente); // Pasamos el cliente a la vista para mostrar los detalles
+		}
+		public IActionResult IniciarReservaTurno(int pacienteId)
+		{
+			paciente? paciente = ObtenerPacientePorId(pacienteId);
+
+			// Obtener los Tipos de Servicio
+			var tiposEspecialidad = ObtenerTiposDeEspecialidad();
+			var tipoEspecialidadId = tiposEspecialidad.FirstOrDefault()?.TipoEspecialidadId ?? 0;
+
+			// Obtener los Servicios que pertenecen al Tipo de Servicio especificado
+			var especialidad = ObtenerEspecialidadPorTipoEspecialidad(tipoEspecialidadId);
+
+			// Obtener las fechas de los turnos libres
+			var fechaHoy = DateTime.Today;
+			var listaFechas = ObtenerFechasDisponiblesDeTurnosProximos60Dias(fechaHoy);
+			var fecha = listaFechas.FirstOrDefault();
+			var listaFechasFormateadas = FormatearFechasAStringDDMMYYYY(listaFechas);
+
+			// Obtener las horas de los turnos libres
+			var listaHoras = ObtenerHorasDisponiblesDeTurnosPorFecha(fecha);
+			var hora = listaHoras.FirstOrDefault();
+			var listaHorasFormateadas = FormatearHorasAString(listaHoras);
+
+			var reservaTurno = new ReservaTurno
+			{
+				FechaTurno = fecha,
+				HoraTurno = hora,
+				Paciente = paciente,
+				PacienteId = pacienteId,
+			};
+
+			ViewData["SelectListTiposEspecialidades"] = new SelectList(tiposEspecialidad, "TipoEspecialidadId", "Descripcion");
+			ViewData["SelectListEspecialidades"] = new SelectList(especialidad, "EspecialidadId", "Descripcion");
+			ViewData["SelectListFechas"] = new SelectList(listaFechasFormateadas);
+			ViewData["SelectListHoras"] = new SelectList(listaHorasFormateadas);
+
+			ViewBag.HideHeader = true;
+			return View(reservaTurno);
+		}
+
+		[HttpGet]
+		public ActionResult GenerarTurnosLibres()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public async Task<ActionResult> GenerarTurnosLibres(GenerarTurnosLibresModel model)
+		{
+			if (ModelState.IsValid)
+			{
+				try
+				{
+					var parametros = new List<SqlParameter>
+			{
+				new SqlParameter("@FechaTurnoDesde", model.FechaTurnoDesde),
+				new SqlParameter("@FechaTurnoHasta", model.FechaTurnoHasta),
+				new SqlParameter("@HoraTurnoDesde", model.HoraTurnoDesde),
+				new SqlParameter("@HoraTurnoHasta", model.HoraTurnoHasta),
+				new SqlParameter("@Intervalo", model.Intervalo),
+				new SqlParameter("@Lunes", model.Lunes),
+				new SqlParameter("@Martes", model.Martes),
+				new SqlParameter("@Miercoles", model.Miercoles),
+				new SqlParameter("@Jueves", model.Jueves),
+				new SqlParameter("@Viernes", model.Viernes),
+				new SqlParameter("@Sabado", model.Sabado),
+				new SqlParameter("@Domingo", model.Domingo)
+			};
+
+					var result = await _context.Database.ExecuteSqlRawAsync("EXEC GenerarTurnosLibres @FechaTurnoDesde, @FechaTurnoHasta, @HoraTurnoDesde, @HoraTurnoHasta, @Intervalo, @Lunes, @Martes, @Miercoles, @Jueves, @Viernes, @Sabado, @Domingo", parametros.ToArray());
+
+					// Mostrar mensaje de éxito
+					ViewBag.Message = "Turnos generados exitosamente.";
+				}
+				catch (Exception ex)
+				{
+					// Manejar excepción si ocurre un error al ejecutar el procedimiento almacenado
+					ModelState.AddModelError(string.Empty, "Ocurrió un error al generar los turnos: " + ex.Message);
+				}
+			}
+
+			return View(model);
+		}
+	}
 }

@@ -13,33 +13,34 @@ namespace AgendaDelConsultorio.Models
         }
         [Key]
         public int PacienteId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Apellido { get; set; } = null!;
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Nombre { get; set; } = null!;
         [Display (Name ="Fecha de Nacimiento") ]
         [DataType(DataType.Date)]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public DateTime? FechaNacimiento { get; set; }
         [Display (Name ="Tipo de Documento")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string TipoDocumento { get; set; } = null!;
         [Display (Name = "Número de documento")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public int NumeroDocumento { get; set; }
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string Calle { get; set; } = null!;
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public int Altura { get; set; }
         [Display (Name = "Provincia")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public int ProvinciaId { get; set; }
         [Display (Name = "Localidad")]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public int LocalidadId { get; set; }
         [Display (Name = "Código Postal")]
         public int CodigoPostal { get; set; }
         [Display (Name = "Correo electrónico")]
-        [Required]
+        [Required(ErrorMessage = "El campo {0} es obligatorio.")]
         public string CorreoElectronico { get; set; } = null!;
         [Display (Name = "Teléfono")]
         public string Telefono { get; set; } = null!;

@@ -36,7 +36,7 @@ namespace AgendaDelConsultorio.Controllers
 
             var localidad = await _context.Localidades
                 .Include(l => l.Provincia)
-                .FirstOrDefaultAsync(m => m.Localidadid == id);
+                .FirstOrDefaultAsync(m => m.LocalidadId == id);
             if (localidad == null)
             {
                 return NotFound();
@@ -57,7 +57,7 @@ namespace AgendaDelConsultorio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Localidadid,ProvinciaId,Descripcion")] Localidad localidad)
+        public async Task<IActionResult> Create([Bind("LocalidadId,ProvinciaId,Descripcion")] Localidad localidad)
         {
             if (ModelState.IsValid)
             {
@@ -91,9 +91,9 @@ namespace AgendaDelConsultorio.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Localidadid,ProvinciaId,Descripcion")] Localidad localidad)
+        public async Task<IActionResult> Edit(int id, [Bind("LocalidadId,ProvinciaId,Descripcion")] Localidad localidad)
         {
-            if (id != localidad.Localidadid)
+            if (id != localidad.LocalidadId)
             {
                 return NotFound();
             }
@@ -107,7 +107,7 @@ namespace AgendaDelConsultorio.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!LocalidadExists(localidad.Localidadid))
+                    if (!LocalidadExists(localidad.LocalidadId))
                     {
                         return NotFound();
                     }
@@ -132,7 +132,7 @@ namespace AgendaDelConsultorio.Controllers
 
             var localidad = await _context.Localidades
                 .Include(l => l.Provincia)
-                .FirstOrDefaultAsync(m => m.Localidadid == id);
+                .FirstOrDefaultAsync(m => m.LocalidadId == id);
             if (localidad == null)
             {
                 return NotFound();
@@ -162,7 +162,7 @@ namespace AgendaDelConsultorio.Controllers
 
         private bool LocalidadExists(int id)
         {
-          return (_context.Localidades?.Any(e => e.Localidadid == id)).GetValueOrDefault();
+          return (_context.Localidades?.Any(e => e.LocalidadId == id)).GetValueOrDefault();
         }
     }
 }
